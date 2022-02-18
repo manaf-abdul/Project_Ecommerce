@@ -19,7 +19,7 @@ const OrderScreen = () => {
 
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
-console.log(order)
+
     const orderPay = useSelector(state => state.orderPay)
     const { loading: loadingPay, success: successPay } = orderPay
 

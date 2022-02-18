@@ -14,6 +14,7 @@ const SignUp = () => {
     const [name, setName] = useState('')
     const [confirmpassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
+    const [refferalId,setRefferalId]=useState('')
 
     const dispatch = useDispatch();
     const userRegister = useSelector(state => state.userLogin)
@@ -32,7 +33,7 @@ const SignUp = () => {
             setMessage('Passwords do not match')
         }
         else {
-            dispatch(register(name, email, password))
+            dispatch(register(name,email,password,refferalId))
             navigate('/signin')
         }
     }
@@ -51,11 +52,11 @@ const SignUp = () => {
                         <h3>Register</h3>
                         <div className="login__field">
                             <i className="login__icon fas fa-user"></i>
-                            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="login__input" placeholder="Email" />
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="login__input" placeholder="Email" required/>
                         </div>
                         <div className="login__field">
                             <i className="login__icon fas fa-user"></i>
-                            <input value={name} onChange={(e) => setName(e.target.value)} type="text" className="login__input" placeholder="Name" />
+                            <input value={name} onChange={(e) => setName(e.target.value)} type="text" className="login__input" placeholder="Name" required/>
                         </div>
                         {/* <div className="login__field">
                             <i className="login__icon fas fa-user"></i>
@@ -63,11 +64,15 @@ const SignUp = () => {
                         </div> */}
                         <div className="login__field">
                             <i className="login__icon fas fa-lock"></i>
-                            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="login__input" placeholder="Password" />
+                            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="login__input" placeholder="Password" required/>
                         </div>
                         <div className="login__field">
                             <i className="login__icon fas fa-lock"></i>
-                            <input value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="login__input" placeholder="Confirm Password" />
+                            <input value={confirmpassword} onChange={(e) => setConfirmPassword(e.target.value)} type="password" className="login__input" placeholder="Confirm Password" required/>
+                        </div>
+                        <div className="login__field">
+                            <i className="login__icon fas fa-user"></i>
+                            <input value={refferalId} onChange={(e) => setRefferalId(e.target.value)} type="text" className="login__input" placeholder="Have a referral id ?!" required/>
                         </div>
                         <Button type='submit' className="button login__submit">
                             <span className="button__text">Register</span>

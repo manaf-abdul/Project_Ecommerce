@@ -8,8 +8,8 @@ const addOrderItems = asyncHandler(async(req,res) => {
         itemsPrice,
         taxPrice,
         shippingPrice,
-        totalPrice} = req.body
-        console.log(req.body)
+        totalPrice,
+        walletDiscount} = req.body
 
     if(orderItems && orderItems.length===0){
         res.status(400)
@@ -23,7 +23,8 @@ const addOrderItems = asyncHandler(async(req,res) => {
             itemsPrice:Number(itemsPrice),
             taxPrice,
             shippingPrice,
-            totalPrice
+            totalPrice,
+            walletDiscount,
         })
     console.log(order)
      const createdOrder=await order.save()

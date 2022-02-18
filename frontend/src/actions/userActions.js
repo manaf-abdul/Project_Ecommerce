@@ -29,7 +29,7 @@ export const login = (email,password)=>async (dispatch)=>{
             dispatch({type:USER_LOGIN_REQUEST})
             const config = { headers: {'Content-Type': 'application/json',},}
             const {data}=await axios.post('/api/users/login',{email,password},config)
-            console.log(data)
+            // console.log(data)
             dispatch({type:USER_LOGIN_SUCCESS,payload:data})
             localStorage.setItem('userInfo', JSON.stringify(data))
         } catch (error) {
@@ -49,11 +49,11 @@ export const logout =()=>(dispatch)=>{
   dispatch({type:ORDER_LIST_MY_RESET})
 }
 
-export const register = (name,email,password)=>async (dispatch)=>{
+export const register = (name,email,password,refferalId)=>async (dispatch)=>{
   try {
       dispatch({type:USER_REGISTER_REQUEST})
       const config = { headers: {'Content-Type': 'application/json',},}
-      const {data}=await axios.post('/api/users/register',{name,email,password},config)
+      const {data}=await axios.post('/api/users/register',{name,email,password,refferalId},config)
       console.log(data)
       dispatch({type:USER_REGISTER_SUCCESS,payload:data})
       dispatch({type:USER_LOGIN_SUCCESS, payload:data})
@@ -75,7 +75,6 @@ export const getUserDetails = (id)=>async (dispatch,getState)=>{
       const config = { headers: {'Content-Type': 'application/json',
     Authorization: `Bearer ${userInfo.token}`},}
       const {data}=await axios.get(`/api/users/${id}`,config)
-      // console.log(data)
       dispatch({type:USER_DETAILS_SUCCESS,payload:data})
   } catch (error) {
       dispatch({type: USER_DETAILS_FAIL,

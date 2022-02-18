@@ -51,6 +51,11 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: 0.0,
     },
+    walletDiscount: {
+      type: Number,
+      required: true,
+      default: 0.0,
+    },
     itemsPrice: {
       type: Number,
       required: true,

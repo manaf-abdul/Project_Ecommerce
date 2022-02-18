@@ -16,6 +16,7 @@ const Header = () => {
     const logoutHandler = () => {
         // console.log('logout')
         dispatch(logout())
+        navigate('/signin')
     }
 
     return (

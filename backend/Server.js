@@ -29,8 +29,8 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-app.use('/api/products', fileupload())
 app.use('/api/products', productRoutes)
+app.use('/api/products', fileupload())
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)

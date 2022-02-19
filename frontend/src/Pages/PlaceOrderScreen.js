@@ -15,7 +15,6 @@ const PlaceOrderScreen = () => {
 
     const userDetails = useSelector(state => state.userDetails)
     const { loading, error:detailsError, user } = userDetails
-    console.log(user)
 
     const addDecimals = (num) => {
         return (Math.round(num * 100) / 100).toFixed(2)

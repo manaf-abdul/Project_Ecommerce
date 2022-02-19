@@ -93,5 +93,13 @@ const updateProduct = asyncHandler(async (req, res) => {
     }
 })
 
+const getProductsRepport = asyncHandler(async (req, res) => {
+    // console.log(req)
+    const product = await Product.find({})
+    let length=product.length
+    // console.log(length)
+    res.json(length)
+})
 
-export { getProducts, getProductById, deleteProduct,createProduct,updateProduct }
+
+export { getProducts, getProductById, deleteProduct,createProduct,updateProduct,getProductsRepport }

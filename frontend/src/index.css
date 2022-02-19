@@ -37,3 +37,10 @@ code {
   top:3%;
   
 }
+.sideTab{   
+   background: #6A679E;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #5C5696;
+}

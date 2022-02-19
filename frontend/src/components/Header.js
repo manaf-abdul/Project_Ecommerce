@@ -66,6 +66,7 @@ const Header = () => {
                                 <NavDropdown.Item onClick={() => navigate('/admin/orderlist')}>Orders</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/categories')}>Categories</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/offers')}>Offers</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => navigate('/admin/dashboard')}>Offers</NavDropdown.Item>
                             </NavDropdown>
                         )}
                     </Nav>

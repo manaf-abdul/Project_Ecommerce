@@ -20,6 +20,7 @@ import EditAddress from '../Pages/EditAddress'
 import CategoryList from '../Pages/CategoryList';
 import AddCategory from '../Pages/AddCategory';
 import CreateOffer from '../Pages/CreateOffer';
+import DashBoard from '../Pages/DashBoard';
 
 const UserRoutes = () => {
     return (
@@ -46,6 +47,7 @@ const UserRoutes = () => {
                 <Route path='/admin/categories' element={<CategoryList/>}/>
                 <Route path='/admin/addcategory' element={<AddCategory/>}/>
                 <Route path='/admin/offers' element={<CreateOffer/>}/>
+                <Route path='/admin/dashboard' element={<DashBoard/>}/>
                 
                
             </Routes>

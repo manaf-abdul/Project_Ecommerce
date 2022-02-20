@@ -99,10 +99,63 @@ const getProductsReport = asyncHandler(async (req, res) => {
     const productNum=product.length
     const categories = await Category.find({})
     const categoriesNum=categories.length
-    const catProduct= await Product.find({}).populate('category','id name')
-    console.log(catProduct)
-    res.json({productCount:productNum,categoriesCount:categoriesNum})
+
+    const categoryData= await Product.aggregate([
+        { 
+            $group:{
+                _id:"$category",
+                qty:{$sum:1}
+            },
+        },
+        {
+            $project:{
+                category:"$_id",
+                qty:1
+            }
+        }
+    ]) 
+    res.json({productCount:productNum,categoriesCount:categoriesNum,categoryReport:categoryData})
 })
 
+// @desc    Create new review
+// @route   POST /api/products/:id/reviews
+// @access  Private
+const createProductReview = asyncHandler(async (req, res) => {
 
-export { getProducts, getProductById, deleteProduct,createProduct,updateProduct,getProductsReport }
+    const product = await Product.findById(req.params.id)
+  
+    if (product) {
+      const alreadyReviewed = product.reviews.find(
+        (r) => r.user.toString() === req.body.userInfo._id.toString()
+      )
+  
+      if (alreadyReviewed) {
+        res.status(400)
+        throw new Error('Product already reviewed')
+      }
+  
+      const review = {
+        name: req.body.userInfo.name,
+        rating: Number(req.body.review.rating),
+        comment:req.body.review.comment,
+        user: req.body.userInfo._id,
+      }
+  
+      product.reviews.push(review)
+  
+      product.numReviews = product.reviews.length
+  
+      product.rating =
+        product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        product.reviews.length
+  
+      await product.save()
+      res.status(201).json({ message: 'Review added' })
+    } else {
+      res.status(404)
+      throw new Error('Product not found')
+    }
+  })
+
+
+export { getProducts, getProductById, deleteProduct,createProduct,updateProduct,createProductReview,getProductsReport }

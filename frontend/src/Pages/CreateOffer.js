@@ -59,15 +59,15 @@ const CreateOffer = () => {
         <Link to="/admin/categories" className="btn btn-light my-3">
           Go Back
         </Link>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first" bg='primary'>
+        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row>
             <Col sm={3}>
-              <Nav variant="pills" className="flex-column">
+              <Nav variant="pills" className="flex-column"  style={{ cursor: 'pointer' }}>
                 <Nav.Item>
-                  <Nav.Link eventKey="first">Offers</Nav.Link>
+                  <Nav.Link eventKey="first" className='font-weight-bold'>Offers</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">Add new offer</Nav.Link>
+                  <Nav.Link eventKey="second" className='font-weight-bold'>Add new offer</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>

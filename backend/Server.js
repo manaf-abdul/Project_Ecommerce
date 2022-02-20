@@ -2,6 +2,7 @@ import path from 'path'
 import express from 'express'
 import connectDB from './config/db.js'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
 import productRoutes from './Routes/productRoutes.js'
 import userRoutes from './Routes/userRoutes.js'
 import orderRoutes from './Routes/orderRoutes.js'
@@ -20,6 +21,10 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 dotenv.config()
 const app=express()
 connectDB()
+
+if(process.env.NODE_ENV === 'development'){
+  app.use(morgan('dev'))
+}
 
 app.use(express.json({ limit: "50mb" }))
 

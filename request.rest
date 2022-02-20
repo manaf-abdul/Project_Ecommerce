@@ -92,4 +92,8 @@ Content-Type: application/json
     "password":"12345",
     "refferalId":"shish"
 }
+###
+GET  http://localhost:5000/api/orders/report/orders
 
+###
+GET http://localhost:5000/api/users/report/users

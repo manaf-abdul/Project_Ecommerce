@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import './Signin.css'
-import { Button, Form, Container, Row, Col, Table, Card, Tabs, Tab, Nav } from 'react-bootstrap'
+import { Button, Form, Container, Row, Col, Table, Card, Tabs, Tab, Nav, Image } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -55,7 +55,7 @@ const ProfileScreen = () => {
         dispatch(listAddresses())
       }
     }
-  }, [dispatch, navigate, userInfo, orders, successDelete,success,userUpdateProfile])
+  }, [dispatch, navigate, userInfo, orders, successDelete, success, userUpdateProfile])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -77,25 +77,24 @@ const ProfileScreen = () => {
   return (
     <>
       <Container className='pt-2'>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+        <Tab.Container id="left-tabs-example" defaultActiveKey="third">
           <Row>
             <Col sm={3}>
-              <Nav variant="pills" className="flex-column">
+              <Nav variant="pills" className="flex-column" style={{ cursor: 'pointer' }}>
                 <Nav.Item>
-                  <Nav.Link eventKey="first">My Orders</Nav.Link>
+                  <Nav.Link eventKey="first" className='font-weight-bold'>My Orders</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="second">My Addresses</Nav.Link>
+                  <Nav.Link eventKey="second" className='font-weight-bold'>My Addresses</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="third">My Profile</Nav.Link>
+                  <Nav.Link eventKey="third" className='font-weight-bold'>My Profile</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
             <Col sm={9}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-
                   <Row>
                     <Col>
                       <h2 className='text-center pt-3'>My Orders</h2>
@@ -183,11 +182,11 @@ const ProfileScreen = () => {
 
                 <Tab.Pane eventKey="third">
 
-                <h2 className='text-center pt-3'>User Profile</h2>
+                  <h2 className='text-center pt-3'>User Profile</h2>
                   <Row>
                     <Col md={6}>
                       <>
-                      {/* <Card className=' cards'>
+                        {/* <Card className=' cards'>
                           
                             <Row className='pb-3'>
                                 <Card.Text>
@@ -198,17 +197,22 @@ const ProfileScreen = () => {
                                 </Card.Text>
                             </Row>
                         </Card> */}
-                        
-                          <Card className='p-3 mt-4'>
-                          <p>Name: <strong> { user.name } </strong></p>  
-                          <p>Email:<strong> { user.email } </strong></p>
-                          <p>Wallet Balance:<strong> $ {user.wallet} </strong></p>
-                          <p>Referral Id:<strong> {user.refferalId} </strong></p>
-                          </Card>
+
+                        <Card className='p-3 mt-4'>
+                          <div style={{textAlign: 'center'}}>
+                            <i class="fa-solid fa-user fa-10x"></i>
+                          </div>
+                          <Card.Body>
+                            <p>Name: <strong> {user.name} </strong></p>
+                            <p>Email:<strong> {user.email} </strong></p>
+                            <p>Wallet Balance:<strong> $ {user.wallet} </strong></p>
+                            <p>Referral Id:<strong> {user.refferalId} </strong></p>
+                          </Card.Body>
+                        </Card>
                       </>
                     </Col>
                     <Col md={6} className='m-auto'>
-                    <h4 className='text-center pt-3'>Edit Profile</h4>
+                      <h4 className='text-center pt-3'>Edit Profile</h4>
                       {message && <Message variant='danger'>{message}</Message>}
                       { }
                       {success && <Message variant='success'>Profile Updated</Message>}

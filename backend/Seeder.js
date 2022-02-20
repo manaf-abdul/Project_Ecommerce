@@ -1,4 +1,5 @@
 import mongoose  from "mongoose";
+
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import products from './Data/ProductsSample.js';

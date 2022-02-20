@@ -21,8 +21,8 @@ const Header = () => {
 
     return (
 
-        <Navbar collapseOnSelect expand="lg" style={{ background: "#6A679E" }} className="navbarcolor" variant="dark" >
-            <Container>
+        <Navbar collapseOnSelect expand="lg" style={{ background: "#5C5696" }} className="navbarcolor" variant="dark" >
+            {/* <Container> */}
                 <Navbar.Brand onClick={() => navigate('/')}>MultiStore</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -66,12 +66,12 @@ const Header = () => {
                                 <NavDropdown.Item onClick={() => navigate('/admin/orderlist')}>Orders</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/categories')}>Categories</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/offers')}>Offers</NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => navigate('/admin/dashboard')}>Offers</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => navigate('/admin/dashboard')}>Dashboard</NavDropdown.Item>
                             </NavDropdown>
                         )}
                     </Nav>
                 </Navbar.Collapse>
-            </Container>
+            {/* </Container> */}
         </Navbar>
     )
 };

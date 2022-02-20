@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Product from '../Models/ProductModel.js'
+import Category from '../Models/categoryModel.js'
 import cloudinary from 'cloudinary'
 
 const getProducts = asyncHandler(async (req, res) => {
@@ -93,13 +94,15 @@ const updateProduct = asyncHandler(async (req, res) => {
     }
 })
 
-const getProductsRepport = asyncHandler(async (req, res) => {
-    // console.log(req)
+const getProductsReport = asyncHandler(async (req, res) => {
     const product = await Product.find({})
-    let length=product.length
-    // console.log(length)
-    res.json(length)
+    const productNum=product.length
+    const categories = await Category.find({})
+    const categoriesNum=categories.length
+    const catProduct= await Product.find({}).populate('category','id name')
+    console.log(catProduct)
+    res.json({productCount:productNum,categoriesCount:categoriesNum})
 })
 
 
-export { getProducts, getProductById, deleteProduct,createProduct,updateProduct,getProductsRepport }
+export { getProducts, getProductById, deleteProduct,createProduct,updateProduct,getProductsReport }

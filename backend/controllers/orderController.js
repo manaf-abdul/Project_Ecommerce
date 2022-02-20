@@ -113,5 +113,30 @@ const getOrders=asyncHandler(async(req,res)=>{
     const orders=await Order.find({}).populate('user','id name')
     res.json(orders)
 }) 
+
+const getOrderReports=asyncHandler(async(req,res)=>{
+    const orders=await Order.find({})
+    const ordersLength=orders.length
+
+    let totalRevenue = 0
+    let unpaidPrice = 0
+    let paidPrice = 0
+    let paidOrders=0
+    let unpaidOrders=0
+    orders.forEach((order)=>{
+       if(order.totalPrice){
+            totalRevenue=totalRevenue+order.totalPrice;
+       }
+       if(!order.isPaid){
+        unpaidPrice=unpaidPrice+order.totalPrice
+        unpaidOrders=unpaidOrders+1;
+       }
+       if(order.isPaid){
+        paidPrice=paidPrice+order.totalPrice
+        paidOrders=paidOrders+1;
+       }
+    })
+    res.json({totalPrice:totalRevenue,unpaid:unpaidPrice,paidprice:paidPrice,totalOrders:ordersLength,paidOrdersNumber:paidOrders,unpaidOrdersNumber:unpaidOrders})
+}) 
  
-export {addOrderItems,getOrderById,updateOrderToPaid,getMyOrders,getOrders,updateOrderToDelivered}
+export {addOrderItems,getOrderById,updateOrderToPaid,getMyOrders,getOrders,updateOrderToDelivered,getOrderReports}

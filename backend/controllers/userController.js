@@ -223,22 +223,14 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 })
 
-// const isBlock=asyncHandler(async (req, res) => {
-//  const user=await User.findById(req.params.id,{isBlock:true})
-
-//   res.status(200).json({
-//     success:true,
-//   })
-// })
-
-// const isUnBlock=asyncHandler(async (req, res) => {
-//   const user=await User.findByIdAndUpdate(req.params.id,{isBlock:false})
-//    res.json(user)
-//    res.status(200).json({
-//     success:true,
-//   })
-//  })
+const getUsersReport = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+  const usersNum=users.length
+  const blockedUsers = await User.find({isBlocked:true})
+  const blockedUsersNum=blockedUsers.length
+  
+  res.json({usersCount:usersNum,blockedUsersCount:blockedUsersNum})
+})
 
 
-
-export { authUser, getUserProfile, registerUser, updateUserProfile, getUsers, updateUser,getUserById } 
+export { authUser, getUserProfile, registerUser, updateUserProfile, getUsers, updateUser,getUserById,getUsersReport} 

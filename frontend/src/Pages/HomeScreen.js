@@ -1,24 +1,39 @@
-import React from 'react';
-// import {Col,Row,Container} from 'react-bootstrap'
-import ControlledCarousel from '../components/Carousel'
-import Categories from '../components/Categories'
-// import LatestProducts from '../components/Products'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import Products from '../components/Products';
+import { Col, Row, Container } from 'react-bootstrap'
+import { listProducts } from '../actions/productActions'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
 
 const HomeScreen = () => {
+
+  const params = useParams()
+  const keyword = params.keyword
+  const dispatch = useDispatch()
+  const productList = useSelector(state => state.productList)
+  const { loading, error, products } = productList
+
+  useEffect(() => {
+    dispatch(listProducts(keyword))
+    console.log(keyword)
+
+  }, [dispatch,keyword])
+
+
   return (
-      <>
-      <ControlledCarousel/>
-      <Categories></Categories>
-      {/* <Container>
-      <h2 className="pt-5">Latest</h2>
-      <Row className="pt-2">
-      
-        <Col sm={12} md={6} lg={4} xl={3}>
-      <LatestProducts caption="Latest Products"/>
-      </Col>
-     </Row>
-     </Container> */}
-      </>
+    <Container className="pt-3">
+      {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> :
+        <Row>
+          {products.map(product => (
+            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+              <Products product={product} />
+            </Col>
+          ))}
+        </Row>
+      }
+    </Container>
   )
 };
 

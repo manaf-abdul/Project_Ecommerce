@@ -1,6 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Button, Form, Container, Row, Col, Table, Tab, Nav, Card, Tabs } from 'react-bootstrap'
+import {
+    BarChart,
+    ResponsiveContainer,
+    XAxis,
+    YAxis,
+    Bar,
+    Legend,
+    Tooltip,
+    CartesianGrid,
+    Line,
+    LineChart,
+    PieChart,
+    Pie,
+    Sector,
+    Cell,
+  } from 'recharts'
 
 const DashBoard = () => {
 
@@ -30,6 +46,16 @@ const DashBoard = () => {
         getUserData()
     }, [])
 
+
+  const sample =[
+    {
+      name: 'Year',
+      paid: orderData && orderData.totalPrice,
+      unpaid: orderData && orderData.paidprice,
+      total: orderData && orderData.unpaid,
+    }]
+    console.log(sample)
+
     return (
         <>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -55,7 +81,6 @@ const DashBoard = () => {
                         <Tab.Content>
                             <Tab.Pane eventKey="first">
                                 <Container>
-
                                     <Row className="align-items-center justify-content-center pt-3">
                                         <h1>Sales Overview</h1>
                                     </Row>
@@ -121,7 +146,37 @@ const DashBoard = () => {
                                             </Card>
                                         </Col>
                                     </Row>
+                                    <Container>
+                                    <h3 className="text-center pt-4">Monthly Sales</h3>
+                                    <ResponsiveContainer width="75%" height={400} className="m-auto">
+                                        <BarChart data={sample}>
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis dataKey="name" />
+                                            <YAxis />
+                                            <Tooltip />
+                                            <Legend />
+                                            <Bar dataKey="total" fill="#8884d8" />
+                                            <Bar dataKey="unpaid" fill="#82ca9d" />
+                                            <Bar dataKey="paid" fill="#e63d00" />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                    </Container>
 
+                                    <Container>
+                                    <h3 className="text-center pt-4">Quantity Sold</h3>
+                                    <ResponsiveContainer width="75%" height={400} className="m-auto">
+                                        <BarChart data={sample}>
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis dataKey="name" />
+                                            <YAxis />
+                                            <Tooltip />
+                                            <Legend />
+                                            <Bar dataKey="total" fill="#8884d8" />
+                                            <Bar dataKey="unpaid" fill="#82ca9d" />
+                                            <Bar dataKey="paid" fill="#e63d00" />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                    </Container>
                                 </Container>
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">

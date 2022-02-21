@@ -7,29 +7,29 @@
 	font-family: Raleway, sans-serif;
 } */
 
-/* body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
-} */
+body {
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);	
+	overflow-x: hidden;	
+}
 
 .container2 {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 100vh;
+	width:100%
 }
 
 .screen {		
 	background: linear-gradient(90deg, #5D54A4, #7C78B8);		
 	position: relative;	
-	height: 600px;
-	width: 500px;	
+	width: 100%;	
 	box-shadow: 0px 0px 24px #5C5696;
 }
 
 .screen__content {
 	z-index: 1;
 	position: relative;	
-	height: 100%;
+	
 }
 
 .screen__background {		
@@ -57,35 +57,35 @@
 	border-radius: 0 72px 0 0;
 }
 
-.screen__background__shape2 {
+/* .screen__background__shape2 {
 	height: 220px;
 	width: 220px;
 	background: #6C63AC;	
-	top: -172px;
+	top: -100px;
 	right: 0;	
 	border-radius: 32px;
-}
+} */
 
-.screen__background__shape3 {
+/* .screen__background__shape3 {
 	height: 540px;
 	width: 190px;
 	background: linear-gradient(270deg, #5D54A4, #6A679E);
 	top: -24px;
 	right: 0;	
 	border-radius: 32px;
-}
+} */
 
-.screen__background__shape4 {
+/* .screen__background__shape4 {
 	height: 400px;
 	width: 200px;
 	background: #7E7BB9;	
 	top: 420px;
 	right: 50px;	
 	border-radius: 60px;
-}
+} */
 
 .login {
-	width: 500px;
+	width: 100%;
 	padding: 30px;
 	padding-top: 100px;
 }
@@ -93,6 +93,7 @@
 .login__field {
 	padding: 10px 0px;	
 	position: relative;	
+	width: 100%;
 }
 
 .login__icon {
@@ -108,7 +109,7 @@
 	padding: 10px;
 	padding-left: 24px;
 	font-weight: 700;
-	width: 80%;
+	width: 59%;
 	transition: .2s;
 }
 
@@ -131,6 +132,7 @@
 	display: flex;
 	align-items: center;
 	width: 50%;
+	height:1.5rem;
 	color: #4C489D;
 	box-shadow: 0px 2px 2px #5C5696;
 	cursor: pointer;
@@ -149,14 +151,14 @@
 	margin-left: auto;
 	color: #7875B5;
 }
-
+/* 
 .social-login {	
 	position: absolute;
 	height: 140px;
 	width: 200px;
 	text-align: center;
-	/* bottom: 0px; */
-	/* right: 0px; */
+	bottom: 0px;
+	right: 0px;
 	padding-left:25px;
 	color: #fff;
 	text-align: center;
@@ -177,7 +179,7 @@
 
 .social-login__icon:hover {
 	transform: scale(1.5);	
-}
+} */
 .para{
 	color:black
 }

@@ -4,7 +4,17 @@ import Category from '../Models/categoryModel.js'
 import cloudinary from 'cloudinary'
 
 const getProducts = asyncHandler(async (req, res) => {
-    const product = await Product.find({})
+    console.log(req.query.keyword)
+    const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {}
+    console.log(req.query.keyword)
+    const product = await Product.find({...keyword })
     // console.log(product)
     res.json(product)
 })

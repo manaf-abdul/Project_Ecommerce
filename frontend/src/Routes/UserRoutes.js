@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'
 import Header from '../components/Header';
-import Electronics from '../Pages/Electronics';
+// import CategoryScreen from '../components/CategoryScreen';
 import HomeScreen from '../Pages/HomeScreen';
 import SignIn from '../Pages/SignIn';
 import SignUp from '../Pages/SignUp';
@@ -21,11 +21,13 @@ import CategoryList from '../Pages/CategoryList';
 import AddCategory from '../Pages/AddCategory';
 import CreateOffer from '../Pages/CreateOffer';
 import DashBoard from '../Pages/DashBoard';
+import Footer from '../components/Footer';
 
 const UserRoutes = () => {
     return (
         <>
             <Header/>
+            <main style={{minHeight: '90vh'}}>
             <Routes>
                 <Route path='/order/:id' element={<OrderScreen/>} />
                 <Route path='/' element={<HomeScreen />} />
@@ -33,7 +35,7 @@ const UserRoutes = () => {
                 <Route path='/signup' element={<SignUp />} />
                 <Route path='/profile' element={<ProfileScreen />} />
                 <Route path='/shipping' element={<ShippingScreen/>}/>
-                <Route path='/categories/electronics' element={<Electronics/>}/> 
+                {/* <Route path='/categories/electronics' element={<CategoryScreen/>}/>  */}
                 <Route path='/product/:id' element={<ProductScreen/>}/>
                 <Route path='/cart' element={<CartScreen/>}/>
                 <Route path='/cart/:id' element={<CartScreen/>}/>
@@ -48,9 +50,10 @@ const UserRoutes = () => {
                 <Route path='/admin/addcategory' element={<AddCategory/>}/>
                 <Route path='/admin/offers' element={<CreateOffer/>}/>
                 <Route path='/admin/dashboard' element={<DashBoard/>}/>
-                
-               
+                <Route path="/search/:keyword" element={<HomeScreen />}exact/>
             </Routes>
+            </main>
+            <Footer/>
         </>
     )
 };

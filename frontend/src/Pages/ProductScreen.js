@@ -68,7 +68,7 @@ const Product = () => {
 
   return (
     <Container className='pt-3'>
-      <Link className='btn btn-light my-3' to='/categories/electronics'>
+      <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
       {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (

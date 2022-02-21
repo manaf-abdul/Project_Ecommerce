@@ -3,15 +3,15 @@ import User from '../Models/userModel.js'
 import generateToken from '../utils/generateToken.js'
 
 const authUser = asyncHandler(async (req, res) => {
-  console.log(req.body)
   const { email, password } = req.body
   const user = await User.findOne({ email: email })
 
+  if (user.isBlock) {
+    res.status(401)
+    throw new Error('User blocked by admin')
+  }
+
   if (user && (await user.matchPassword(password))) {
-    if (user.isBlock) {
-      res.status(401)
-      throw new Error('User blocked by admin')
-    } else {
       res.json({
         _id: user._id,
         name: user.name,
@@ -20,7 +20,6 @@ const authUser = asyncHandler(async (req, res) => {
         token: generateToken(user._id)
       })
       console.log('user signin success')
-    }
   }
   else {
     res.status(401)
@@ -77,7 +76,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @route   POST /api/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
-  // console.log(req.body)
+  console.log(req.body)
   const { name, email, password, refferalId } = req.body
   const userExists = await User.findOne({ email })
 

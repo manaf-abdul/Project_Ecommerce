@@ -25,7 +25,6 @@ const SignIn = () => {
     if(userInfo){
       navigate(`/${redirect}`)
     }
-    console.log('+++++++++++++++')
   },[userInfo,redirect])
 
   const submitHandler=(e)=>{
@@ -36,8 +35,8 @@ const SignIn = () => {
 
   return (
     <Row>
-      <Col xs={12} sm={12} md={6} lg={6} className='m-auto'>
-    <div className="container2">
+      <Col xs={12} sm={12} md={6} lg={4} className='m-auto'>
+    <div className="text-center">
       <div className="screen">
         <div className="screen__content">
 
@@ -53,13 +52,13 @@ const SignIn = () => {
               <i className="login__icon fas fa-lock"></i>
               <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" className="login__input" placeholder="Password" />
             </div>
-            <Button type='submit' className="button login__submit">
+            <Button type='submit' className="button login__submit m-auto">
               <span className="button__text">Log In Now</span>
               <i className="button__icon fas fa-chevron-right"></i>
             </Button>
-            <div classNameName='d-flex align-items-center '>
-              <p classNameName='mb-0 me-2'>Don't have an account?</p>
-              <Button onClick={() => navigate('/signup')} type='button' className='rounded'>Create new</Button>
+            <div className='d-flex align-items-center mt-4 ml-4 text-center'>
+              <p className='mb-0 me-2'>Don't have an account?</p>
+              <Button onClick={() => navigate('/signup')} type='button' size='sm' className='rounded'>Create new</Button>
             </div>
 
             {/* <Button className="button login__submit">

@@ -46,12 +46,13 @@ const Header = () => {
                         }
                         {userInfo && userInfo.isAdmin && (
                             <NavDropdown title='Admin' id='adminmenu'>
+                                <NavDropdown.Item onClick={() => navigate('/admin/dashboard')}>Dashboard</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/userlist')}>Users</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/productlist')}>Products</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/orderlist')}>Orders</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/categories')}>Categories</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => navigate('/admin/offers')}>Offers</NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => navigate('/admin/dashboard')}>Dashboard</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => navigate('/admin/salesreport')}>SalesReport</NavDropdown.Item>
                             </NavDropdown>
                         )}
                     </Nav>

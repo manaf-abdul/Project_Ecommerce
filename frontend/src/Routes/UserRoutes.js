@@ -22,6 +22,7 @@ import AddCategory from '../Pages/AddCategory';
 import CreateOffer from '../Pages/CreateOffer';
 import DashBoard from '../Pages/DashBoard';
 import Footer from '../components/Footer';
+import SalesReport from '../Pages/SalesReport';
 
 const UserRoutes = () => {
     return (
@@ -51,6 +52,7 @@ const UserRoutes = () => {
                 <Route path='/admin/offers' element={<CreateOffer/>}/>
                 <Route path='/admin/dashboard' element={<DashBoard/>}/>
                 <Route path="/search/:keyword" element={<HomeScreen />}exact/>
+                <Route path='/admin/salesreport' element={<SalesReport/>}/>
             </Routes>
             </main>
             <Footer/>

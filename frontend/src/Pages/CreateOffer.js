@@ -47,10 +47,8 @@ const CreateOffer = () => {
   }
 
   useEffect(() => {
-    // console.log('55555555555555555555555555555')
     dispatch(listCategories())
     dispatch(listOffers())
-    // console.log(offerslist)
   }, [navigate, dispatch, success,successDelete,offerDelete])
 
   return (
@@ -78,7 +76,7 @@ const CreateOffer = () => {
                     <Col md={9} className='m-auto'>
                       <h1>Offers</h1>
                       {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : (
-                        <Table striped bordered hover responsive className='table-sm'>
+                        <Table striped bordered hover responsive className='table-sm tableColor'>
                           <thead>
                             <tr>
                               <th>ID</th>

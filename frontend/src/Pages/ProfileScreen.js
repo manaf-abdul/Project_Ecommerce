@@ -103,7 +103,7 @@ const ProfileScreen = () => {
                       ) : errorOrders ? (
                         <Message variant='danger'>{errorOrders}</Message>
                       ) : (
-                        <Table striped bordered hover responsive className='table-sm'>
+                        <Table striped bordered hover responsive className='table-sm tableColor'>
                           <thead>
                             <tr>
                               <th>ID</th>

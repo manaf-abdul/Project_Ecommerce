@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import Products from '../components/Products';
 import { Col, Row, Container } from 'react-bootstrap'
 import { listProducts } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
+import ProductCarousel from '../components/ProductCarousel';
 
 const HomeScreen = () => {
 
@@ -22,7 +24,14 @@ const HomeScreen = () => {
   }, [dispatch,keyword])
 
 
-  return (
+  return (<>
+    {!keyword ? (
+      <ProductCarousel />
+    ) : (
+      <Link to='/' className='btn btn-light'>
+        Go Back
+      </Link>
+    )}
     <Container className="pt-3">
       {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> :
         <Row>
@@ -34,6 +43,7 @@ const HomeScreen = () => {
         </Row>
       }
     </Container>
+    </>
   )
 };
 

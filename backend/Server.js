@@ -19,10 +19,10 @@ import cloudinary from 'cloudinary'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 dotenv.config()
-const app=express()
+const app = express()
 connectDB()
 
-if(process.env.NODE_ENV === 'development'){
+if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
 
@@ -34,72 +34,67 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-app.use('/api/products', productRoutes)
 app.use('/api/products', fileupload())
+app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/upload', uploadRoutes)
 app.use('/api/address', addressRoutes)
-app.use('/api/categories',categoryRoutes)
-app.use('/api/offers',offerRoutes)
+app.use('/api/categories', categoryRoutes)
+app.use('/api/offers', offerRoutes)
 
-app.get('/api/config/paypal',(req,res)=>res.send(process.env.PAYPAL_CLIENT_ID))
+app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 
-const __dirname=path.resolve()
-app.use('/uploads',express.static(path.join(__dirname, '/uploads')))
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 var razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 })
-  
-  const getOrder = async (id) => {
-    const data = Order.findById(id).populate('user', 'name email')
-    // console.log(data)
-    return data
+
+const getOrder = async (id) => {
+  const data = Order.findById(id).populate('user', 'name email')
+  // console.log(data)
+  return data
+}
+
+app.post('/razorpay/:id', async (req, res) => {
+  const order = await Order.findById(req.params.id).populate('user', 'name email')
+  const payment_capture = 1
+  const amount = 500
+  const currency = 'INR'
+  const options = {
+    amount: order.totalPrice * 100,
+    currency,
+    receipt: shortid.generate(),
+    payment_capture,
   }
-  
-  app.post('/razorpay/:id', async (req, res) => {
-    // console.log(req.params.id)
-    // const order = await getOrder(req.params.id)
-    const order=await Order.findById(req.params.id).populate('user','name email')
-    const payment_capture = 1
-    const amount = 500
-    const currency = 'INR'
-    // console.log(getOrder)
-    // console.log(order)
-  
-    const options = {
-      amount: order.totalPrice * 100,
-      currency,
-      receipt: shortid.generate(),
-      payment_capture,
-    }
-    console.log(options.amount)
-  
-    try {
-      const response = await razorpay.orders.create(options)
-      res.status(200).json({
-        id: response.id,
-        currency: response.currency,
-        amount: response.amount,
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  })
-  
-  app.post('/razorpay/success/:id', async (req, res) => {
-    const order = await getOrder(req.params.id)
-    order.isPaid = true
-    order.paidAt = Date.now()
-    await order.save()
-    res.status(200).json('success')
-  })
+  console.log(options.amount)
+
+  try {
+    const response = await razorpay.orders.create(options)
+    res.status(200).json({
+      id: response.id,
+      currency: response.currency,
+      amount: response.amount,
+    })
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.post('/razorpay/success/:id', async (req, res) => {
+  const order = await getOrder(req.params.id)
+  order.isPaid = true
+  order.paidAt = Date.now()
+  await order.save()
+  res.status(200).json('success')
+})
 
 app.use(bodyparser.urlencoded({ extended: true }))
 app.use(notFound)
 app.use(errorHandler)
 
 
-app.listen(5000,console.log("server started at port 5000"))
+app.listen(process.env.PORT, console.log(`Server started on PORT : ${process.env.PORT} in ${process.env.NODE_ENV} mode.`))

@@ -8,7 +8,7 @@ const Products = ({product}) => {
     // <Container className="pt-2">
           <Link to={`/product/${product._id}`}>
           <Card className="rounded my-3 p-3 productCard">
-            <Card.Text as='h4' className='productText'>
+            <Card.Text as='h4' className='productText' style={{color:'green'}}>
                 {product.discountPrice > 0 ? <>{product.discountPrice}% OFF</>:null}
                 </Card.Text>
             <Card.Img src={product.image} variant='top' />

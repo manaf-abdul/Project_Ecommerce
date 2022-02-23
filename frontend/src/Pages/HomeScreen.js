@@ -21,7 +21,7 @@ const HomeScreen = () => {
     dispatch(listProducts(keyword))
     console.log(keyword)
 
-  }, [dispatch,keyword])
+  }, [dispatch, keyword])
 
 
   return (<>
@@ -32,8 +32,10 @@ const HomeScreen = () => {
         Go Back
       </Link>
     )}
+
     <Container className="pt-3">
-      {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> :
+      <h1>Top Rated Products</h1>
+      {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> :
         <Row>
           {products.map(product => (
             <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
@@ -43,7 +45,7 @@ const HomeScreen = () => {
         </Row>
       }
     </Container>
-    </>
+  </>
   )
 };
 

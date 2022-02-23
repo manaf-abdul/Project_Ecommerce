@@ -15,7 +15,6 @@ const addNewOffer = asyncHandler(async(req,res) => {
         category,
     })
     const products=await Product.find({category:offer.category})
-    console.log(products)
     products.forEach(async(product)=>{
         product.discountPrice=offer.discount
         await product.save()
@@ -32,9 +31,13 @@ const getOffers = asyncHandler(async(req,res) => {
 })
 
 const deleteOffer = asyncHandler(async(req,res) => {
-    console.log(req.params.id)
     const offer=await Offer.findById(req.params.id)
     if(offer){
+        const products=await Product.find({})
+        products.forEach(async(product)=>{
+        product.discountPrice=product.discountPrice-offer.discount
+        await product.save()
+    })
         await offer.remove()
         res.json({message:'Offer Removed'})
     }else{

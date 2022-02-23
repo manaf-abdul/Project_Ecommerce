@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import { listProductDetails, updateProduct } from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 import {listCategories} from '../actions/categoryActions'
+import CropImage from '../components/CropImage'
 
 const ProductEditScreen = () => {
   const params = useParams()
@@ -25,6 +26,9 @@ const ProductEditScreen = () => {
   const [numReviews, setNumReviews] = useState('')
   const [uploading, setUploading] = useState(false)
   const [images, setImages] = useState([])
+  const [showCropper, setShowCropper] = useState(false)
+  const [cropImage, setCropImage] = useState(false)
+  const [imageOne, setImageOne] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -92,10 +96,10 @@ const ProductEditScreen = () => {
     dispatch(updateProduct(formData, productId))
   }
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0]
+  const uploadFileHandler = async (image) => {
+    // const file = e.target.files[0]
     const formData = new FormData()
-    formData.append('image', file)
+    formData.append('image', image,image.originalname)
     setUploading(true)
 
     try {
@@ -177,10 +181,12 @@ const ProductEditScreen = () => {
                     ></Form.Control>
                     <FormControl
                       type="file"
-                      id="image-file"
-                      label="Choose File"
-                      custom
-                      onChange={uploadFileHandler}
+                      name="imageOne"
+                    onChange={(e) => {
+                      setCropImage(e.target.files[0])
+                      setShowCropper(true)
+                    }}
+                    accept=".jpg,.jpeg,.png,"
                     />
                     {uploading && <Loader />}
                   </Form.Group>
@@ -249,6 +255,19 @@ const ProductEditScreen = () => {
 
                 </Form>
               )}
+              {showCropper && (
+            <CropImage
+              src={cropImage}
+              imageCallback={(image) => {
+                setImageOne(image)
+                setShowCropper(false)
+                uploadFileHandler(image)
+              }}
+              closeHander={() => {
+                setShowCropper(false)
+              }}
+            />
+          )}
             </Col>
           </Row>
         </Container>

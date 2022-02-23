@@ -80,7 +80,7 @@ Content-Type: application/json
 GET  http://localhost:5000/api/offers
 
 ###
-DELETE http://localhost:5000/api/offers/620cdaa44faa125e21b8752e
+DELETE http://localhost:5000/api/offers/62147c760765f2060d61826d
 
 ###
 POST http://localhost:5000/api/users/register

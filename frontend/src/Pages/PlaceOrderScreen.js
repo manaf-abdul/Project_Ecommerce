@@ -6,6 +6,8 @@ import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckOutSteps'
 import { createOrder } from '../actions/orderActions'
 import { getUserDetails } from '../actions/userActions'
+import { USER_DETAILS_RESET } from '../constants/userConstants'
+import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 const PlaceOrderScreen = () => {
     const dispatch = useDispatch()
@@ -22,7 +24,7 @@ const PlaceOrderScreen = () => {
 
     let walletUsed=0;
     if(Number(cart.itemsPrice)+Number(cart.shippingPrice)-(user.wallet) > 0){
-        walletUsed=user.wallet
+        walletUsed=Number(user.wallet)
     }else{
         walletUsed=Number(cart.itemsPrice)+Number(cart.shippingPrice)
     }
@@ -54,6 +56,8 @@ const PlaceOrderScreen = () => {
         }
         if(success) {
             navigate(`/order/${order._id}`)
+      dispatch({ type: USER_DETAILS_RESET})
+      dispatch({ type: ORDER_CREATE_RESET})
         }
     }, [navigate,success,dispatch])
 

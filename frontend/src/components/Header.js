@@ -22,9 +22,9 @@ const Header = () => {
 
     return (
 
-        <Navbar collapseOnSelect expand="lg" style={{ background: "#5C5696",height:'4rem',zIndex:1,color:'red' }} className="navbarcolor" variant="dark" >
+        <Navbar collapseOnSelect expand="lg" style={{ background: "#5C5696",height:'4rem',zIndex:1000,color:'red' }} className="navbarcolor" variant="dark" >
             {/* <Container> */}
-                <Navbar.Brand onClick={() => navigate('/')}>MultiStore</Navbar.Brand>
+                <Navbar.Brand style={{cursor:'pointer'}} onClick={() => navigate('/')}>MultiStore</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 
                 <Navbar.Collapse id="responsive-navbar-nav" style={{ background: "#5C5696",color:'red' }}>

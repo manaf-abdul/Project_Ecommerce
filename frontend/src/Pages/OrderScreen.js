@@ -5,7 +5,7 @@ import { Button, Row, Col, ListGroup, Image, Card, Container } from 'react-boots
 import { PayPalButton } from 'react-paypal-button-v2'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
-import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
+import { getOrderDetails, payOrder, deliverOrder, deleteOrder } from '../actions/orderActions'
 import Loader from '../components/Loader'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET, ORDER_PAY_SUCCESS } from '../constants/orderConstants'
 
@@ -26,6 +26,10 @@ const OrderScreen = () => {
 
     const orderDeliver = useSelector(state => state.orderDeliver)
     const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+
+    const orderCancel = useSelector((state) => state.orderCancel)
+    const { loading: cancelLoading, success: cancelSuccess } = orderCancel
+
 
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
@@ -112,7 +116,7 @@ const OrderScreen = () => {
         }
 
         // dispatch(getOrderDetails(orderId))
-        if (!order || successPay || successDeliver || order._id !== orderId) {
+        if (!order || successPay || successDeliver || cancelSuccess || order._id !== orderId) {
             dispatch({ type: ORDER_PAY_RESET })
             dispatch({ type: ORDER_DELIVER_RESET })
             dispatch(getOrderDetails(orderId))
@@ -133,13 +137,17 @@ const OrderScreen = () => {
         dispatch(deliverOrder(order))
     }
 
+    const cancelHandler = () => {
+        dispatch(deleteOrder(order))
+    }
+
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}
     </Message> : <>
-    <Container>
+        <Container>
             <Row className='pt-2'>
                 <Col sm={12} xs={12}>
                     <h3>Order No:</h3>
-                    <p style={{fontSize:'1.55rem',fontWeight:'bold',color:'indigo'}}>{order._id}</p>
+                    <p style={{ fontSize: '1.55rem', fontWeight: 'bold', color: 'indigo' }}>{order._id}</p>
                 </Col>
             </Row>
             <Row>
@@ -237,19 +245,43 @@ const OrderScreen = () => {
                                     <Col>${order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            {!order.isPaid && (
-                                <>
-                                    <ListGroup.Item>
-                                        {loadingPay && <Loader />}
-                                        {!sdkReady ? <Loader /> : (
-                                            <PayPalButton amount={order.totalPrice} onSuccess={submitPaymentHandler} />
-                                        )}
-                                    </ListGroup.Item>
-                                    <ListGroup.Item>
-                                        <Button onClick={showRazorpay} className='btn btn-block round'>Pay with RazorPay</Button>
-                                    </ListGroup.Item>
-                                </>
+                            {!order.isPaid &&
+                                order.paymentMethod === 'PayPal' && (
+                                    <>
+
+                                        <ListGroup.Item>
+                                            {loadingPay && <Loader />}
+                                            {!sdkReady ? <Loader /> : (
+                                                <PayPalButton amount={order.totalPrice} onSuccess={submitPaymentHandler} />
+                                            )}
+                                        </ListGroup.Item>
+                                    </>
+                                )}
+
+                            {!order.isPaid && order.paymentMethod === 'RazorPay' && (
+                                <ListGroup.Item>
+                                    <Button onClick={showRazorpay} className='btn btn-block round'>Pay with RazorPay</Button>
+                                </ListGroup.Item>
                             )}
+
+                            {!order.isCancelled ? (
+                                <ListGroup.Item>
+                                    <Button
+                                        type="button"
+                                        className="btn btn-danger btn-block"
+                                        onClick={cancelHandler}
+                                    >
+                                        Cancel the Order
+                                    </Button>
+                                </ListGroup.Item>
+                            ) : (
+                                <ListGroup.Item>
+                                    <Button type="button" className="btn btn-warning btn-block">
+                                        Order Cancelled
+                                    </Button>
+                                </ListGroup.Item>
+                            )}
+
                             {loadingDeliver && <Loader />}
                             {userInfo &&
                                 userInfo.isAdmin &&

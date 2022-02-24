@@ -141,6 +141,28 @@ const getOrderReports=asyncHandler(async(req,res)=>{
 
 
 
+// @desc    Cancel the order
+// @route   PUT /api/orders/:id/cancel
+// @access  Private
+const cancelOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id)
+
+  if (order) {
+    order.isCancelled = true
+    order.deliveredAt = Date.now()
+
+    const updatedOrder = await order.save()
+
+    res.json(updatedOrder)
+  } else {
+    res.status(404)
+    throw new Error('Order not found')
+  }
+})
+
+
+
+
 // @desc    Get details for report
 // @route   GET /api/orders/report/:id
 // @access  Private/ Admin
@@ -217,4 +239,4 @@ const report = asyncHandler(async (req, res) => {
     })
   })
  
-export {addOrderItems,getOrderById,updateOrderToPaid,getMyOrders,getOrders,updateOrderToDelivered,getOrderReports,report}
+export {addOrderItems,getOrderById,updateOrderToPaid,getMyOrders,getOrders,updateOrderToDelivered,getOrderReports,cancelOrder,report}

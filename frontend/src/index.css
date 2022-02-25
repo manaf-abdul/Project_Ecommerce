@@ -99,3 +99,19 @@ code {
 header > nav {
 min-height:4 rem;
 }
+
+.brand-text {
+  text-align: unset !important;
+  text-transform: none !important;
+  font-weight: 900 !important;
+  font-size: 2rem;
+  font-family: 'Rancho', cursive !important;
+  letter-spacing: 1px;
+  line-height: initial;
+  padding: 0 !important;
+}
+
+.brand-text>span {
+  color: var(--color);
+  font-size: 2.3rem;
+}

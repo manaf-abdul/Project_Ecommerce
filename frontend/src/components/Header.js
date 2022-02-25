@@ -32,7 +32,7 @@ const Header = () => {
         >
           <Container>
             <LinkContainer to="/" style={{ color: 'white',fontWeight:'bold',fontSize:'1.3rem'}}>
-              <Navbar.Brand className='ml-1'>MultiStore</Navbar.Brand>
+              <Navbar.Brand className='ml-1 brand-text'><span>M</span>ulti<span>S</span>tore</Navbar.Brand>
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -98,7 +98,7 @@ const Header = () => {
                     <LinkContainer to="/admin/categories">
                       <NavDropdown.Item>Categories</NavDropdown.Item>
                     </LinkContainer>
-                    <LinkContainer to="/admin/orderreport">
+                    <LinkContainer to="/admin/orderlist">
                       <NavDropdown.Item>Order Report</NavDropdown.Item>
                     </LinkContainer>
                     <LinkContainer to="/admin/salesreport">

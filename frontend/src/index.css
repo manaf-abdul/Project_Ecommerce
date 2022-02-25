@@ -95,3 +95,7 @@ code {
   transform: translate(-50%, -40%);
   padding: 1rem;
 }
+
+header > nav {
+min-height:4 rem;
+}

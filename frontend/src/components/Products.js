@@ -7,7 +7,7 @@ const Products = ({product}) => {
   return (
     // <Container className="pt-2">
           <Link to={`/product/${product._id}`}>
-          <Card className="rounded my-3 p-3 productCard">
+          <Card className="rounded my-3 p-3 productCard mb-3">
             <Card.Text as='h4' className='productText' style={{color:'green'}}>
                 {product.discountPrice > 0 ? <>{product.discountPrice}% OFF</>:null}
                 </Card.Text>
@@ -17,12 +17,12 @@ const Products = ({product}) => {
               <Card.Text as='div'>
                    <Rating value={product.rating} text={`${product.numReviews} reviews`}/>
                 </Card.Text>
-              <Card.Text as='h4'>
+              <Card.Text as='h5'>
                 {product.discountPrice > 0 ? <strike>{product.price}</strike>:null}
                 </Card.Text>
-              <Card.Text as='h3'>
+              <Card.Text as='h4'>
                 {product.discountPrice > 0 
-                ? product.price - (product.price * (product.discountPrice/100))
+                ? Math.floor(product.price - (product.price * (product.discountPrice/100)))
                 :product.price}
                 
               </Card.Text>

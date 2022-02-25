@@ -16,13 +16,14 @@ const SearchBar = () => {
     }
   
     return (
-      <Form onSubmit={submitHandler} className="d-flex px-3 header-searchbox ">
+      <Form onSubmit={submitHandler} className="d-flex px-3 header-searchbox">
         <Form.Control
           type="text"
           name="q"
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="Search Products..."
-          className=""
+          style={{height:'2 rem',paddingTop:'0.5rem'}}
+          height='1rem'
         ></Form.Control>
         <Button type="submit" variant="outline-light" className="p-2" style={{height:'2.8rem',paddingTop:'0.5rem'}}>
           Search

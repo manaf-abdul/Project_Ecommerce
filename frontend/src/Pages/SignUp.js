@@ -73,7 +73,7 @@ const SignUp = () => {
                                 </div>
                                 <div className="login__field">
                                     <i className="login__icon fas fa-user"></i>
-                                    <input value={refferalId} onChange={(e) => setRefferalId(e.target.value)} type="text" className="login__input" placeholder="Have a referral id ?!" required />
+                                    <input value={refferalId} onChange={(e) => setRefferalId(e.target.value)} type="text" className="login__input" placeholder="Have a referral id ?!" />
                                 </div>
                                 <Button type='submit' className="button login__submit m-auto">
                                     <span className="button__text">Register</span>

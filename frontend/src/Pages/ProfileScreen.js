@@ -76,25 +76,28 @@ const ProfileScreen = () => {
 
   return (
     <>
-      <Container className='pt-2'>
-        <Tab.Container id="left-tabs-example" defaultActiveKey="third">
-          <Row>
-            <Col sm={3}>
-              <Nav variant="pills" className="flex-column" style={{ cursor: 'pointer' }}>
-                <Nav.Item>
-                  <Nav.Link eventKey="first" className='font-weight-bold'>My Orders</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="second" className='font-weight-bold'>My Addresses</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="third" className='font-weight-bold'>My Profile</Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Col>
-            <Col sm={9}>
-              <Tab.Content>
+      {/* <Container className='pt-2'> */}
+      <Tab.Container id="left-tabs-example" defaultActiveKey="third">
+        <Row className="mr-0">
+          <Col sm={3} style={{paddingRight:'0px'}}>
+            <Nav variant="pills" className="flex-column" style={{ cursor: 'pointer' }}>
+              <Nav.Item className='mr-0'>
+                <Nav.Link eventKey="first" className='font-weight-bold'>My Orders</Nav.Link>
+              </Nav.Item>
+              <Nav.Item className='mr-0'>
+                <Nav.Link eventKey="second" className='font-weight-bold'>My Addresses</Nav.Link>
+              </Nav.Item>
+              <Nav.Item className='mr-0'>
+                <Nav.Link eventKey="third" className='font-weight-bold'>My Profile</Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col sm={8}>
+            <Container>
+            <Tab.Content>
+              
                 <Tab.Pane eventKey="first">
+                
                   <Row>
                     <Col>
                       <h2 className='text-center pt-3'>My Orders</h2>
@@ -181,7 +184,7 @@ const ProfileScreen = () => {
                 </Tab.Pane>
 
                 <Tab.Pane eventKey="third">
-
+                      <Container>
                   <h2 className='text-center pt-3'>User Profile</h2>
                   <Row>
                     <Col md={6}>
@@ -199,7 +202,7 @@ const ProfileScreen = () => {
                         </Card> */}
 
                         <Card className='p-3 mt-4'>
-                          <div style={{textAlign: 'center'}}>
+                          <div style={{ textAlign: 'center' }}>
                             <i class="fa-solid fa-user fa-10x"></i>
                           </div>
                           <Card.Body>
@@ -271,17 +274,19 @@ const ProfileScreen = () => {
                   </Row>
 
 
-
+                                   </Container>
                 </Tab.Pane>
-              </Tab.Content>
-            </Col>
-          </Row>
-        </Tab.Container>
+              
+            </Tab.Content>
+            </Container>
+          </Col>
+        </Row>
+      </Tab.Container>
 
 
 
 
-      </Container>
+      {/* </Container> */}
     </>
   )
 };

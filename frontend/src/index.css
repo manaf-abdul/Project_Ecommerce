@@ -38,11 +38,11 @@ code {
   
 }
 .sideTab{   
-   background: #6A679E;
+   background: #4C489D;
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
   color: #fff;
-  background-color: #5C5696;
+  background-color:#4C489D;
 }
 .tableColor{
  background: #fff;
@@ -100,13 +100,23 @@ header > nav {
 min-height:4 rem;
 }
 
-.brand-text {
+/* .brand-text {
   text-align: unset !important;
   text-transform: none !important;
   font-weight: 900 !important;
   font-size: 2rem;
   font-family: 'Rancho', cursive !important;
   letter-spacing: 1px;
+  line-height: initial;
+  padding: 0 !important;
+} */
+.brand-text {
+  text-align: unset !important;
+  text-transform: none !important;
+  font-weight: 900 !important;
+  font-size: 2rem;
+  font-family: 'Rancho', cursive !important;
+  letter-spacing: -0.5px;
   line-height: initial;
   padding: 0 !important;
 }

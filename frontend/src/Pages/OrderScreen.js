@@ -127,7 +127,7 @@ const OrderScreen = () => {
                 setSdkReady(true)
             }
         }
-    }, [dispatch, orderId, successPay, successDeliver, order, navigate])
+    }, [dispatch, orderId, successPay, successDeliver, order, navigate,cancelSuccess])
 
     const submitPaymentHandler = (paymentResult) => {
         dispatch(payOrder(orderId, paymentResult))

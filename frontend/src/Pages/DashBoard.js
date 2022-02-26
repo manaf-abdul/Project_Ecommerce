@@ -78,6 +78,7 @@ const DashBoard = () => {
                         </Container>
                     </Col>
                     <Col xs={12} md={9}>
+                     <Container>
                         <Tab.Content>
                             <Tab.Pane eventKey="first">
                                 <Container>
@@ -196,7 +197,7 @@ const DashBoard = () => {
                                     </Col>
                                 </Row>
                                 <Row className="align-items-center justify-content-center pt-3">
-                                    <h4>Categorywise Product Overview</h4>
+                                   <Container><h4>Categorywise Product Overview</h4></Container> 
                                 </Row>
                                 <Row className="align-items-center justify-content-center pt-3">
                                     {data.categoryReport && data.categoryReport.map((categoryReports) =>
@@ -241,6 +242,7 @@ const DashBoard = () => {
                                 </Row>
                             </Tab.Pane>
                         </Tab.Content>
+                        </Container>
                     </Col>
                 </Row>
             </Tab.Container>

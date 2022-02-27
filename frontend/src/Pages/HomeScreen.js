@@ -8,6 +8,7 @@ import { listProducts } from '../actions/productActions'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import ProductCarousel from '../components/ProductCarousel';
+import Meta from '../components/Meta';
 
 const HomeScreen = () => {
 
@@ -25,6 +26,7 @@ const HomeScreen = () => {
 
 
   return (<>
+  <Meta/>
     {!keyword ? (
       <ProductCarousel />
     ) : (

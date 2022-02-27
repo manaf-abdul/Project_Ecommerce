@@ -161,9 +161,6 @@ const cancelOrder = asyncHandler(async (req, res) => {
   }
 })
 
-
-
-
 // @desc    Get details for report
 // @route   GET /api/orders/report/:id
 // @access  Private/ Admin

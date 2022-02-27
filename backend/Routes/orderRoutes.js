@@ -10,6 +10,7 @@ router.route('/:id').get(protect,getOrderById)
 router.route('/:id/pay').put(protect,updateOrderToPaid)
 router.route('/:id/deliver').put(protect,admin,updateOrderToDelivered)
 router.route('/report/orders').get(getOrderReports)
+router.route('/salesreport').get(report)
 router.route('/salesreport/:id').get(report)
 router.route('/:id/cancel').put(protect, cancelOrder)
 

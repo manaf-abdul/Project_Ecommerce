@@ -86,7 +86,8 @@ const SalesReport = () => {
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState(false)
   const [lower, setLower] = React.useState('2000-01-01')
-  const [upper, setUpper] = React.useState('2040-01-01  ')
+  const [upper, setUpper] = React.useState('2040-01-01')
+  const [year, setYear] = React.useState(2022)
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -98,6 +99,20 @@ const SalesReport = () => {
   const fetchData = async () => {
     const { data } = await axios.get(
       `/api/orders/salesreport/${upper}?lower=${lower}`
+    )
+    setProducts(data.products)
+  }
+
+  const fetchDataByYear = async () => {
+    const { data } = await axios.get(
+      `/api/orders/report/${year}-12-21?lower=${year}-01-01`
+    )
+    setProducts(data.products)
+  }
+
+  const fetchDataByMonth = async (monthFromForm) => {
+    const { data } = await axios.get(
+      `/api/orders/report/${year}-${monthFromForm}-28?lower=${year}-${monthFromForm}-01`
     )
     setProducts(data.products)
   }
@@ -143,6 +158,73 @@ const SalesReport = () => {
             <Button className="datebutton" type="submit">
               Find
             </Button>
+          </Col>
+          <Col>
+            <label htmlFor="upper">Find by year</label>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Select year"
+              onChange={(e) => {
+                e.preventDefault()
+                setYear(e.target.value)
+              }}
+            ></input>
+          </Col>
+          <Col>
+            <Button onClick={fetchDataByYear} className="datebutton">
+              Find
+            </Button>
+          </Col>
+          <Col>
+            <label htmlFor="upper">Find by month</label>
+            <Form.Control
+              as="select"
+              onChange={(e) => {
+                e.preventDefault()
+                fetchDataByMonth(e.target.value)
+              }}
+            >
+              <option name="" value="">
+                MM
+              </option>
+              <option name="January" value={1}>
+                January
+              </option>
+              <option name="February" value={2}>
+                February
+              </option>
+              <option name="March" value={3}>
+                March
+              </option>
+              <option name="April" value={4}>
+                April
+              </option>
+              <option name="May" value={5}>
+                May
+              </option>
+              <option name="June" value={6}>
+                June
+              </option>
+              <option name="July" value={7}>
+                July
+              </option>
+              <option name="August" value={8}>
+                August
+              </option>
+              <option name="September" value={9}>
+                September
+              </option>
+              <option name="October" value={10}>
+                October
+              </option>
+              <option name="November" value={11}>
+                November
+              </option>
+              <option name="December" value={12}>
+                December
+              </option>
+            </Form.Control>
           </Col>
         </Row>
       </Form>

@@ -11,6 +11,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Rating from '../components/Rating'
 import ReactImageMagnify from 'react-image-magnify'
+import Meta from '../components/Meta'
 // import Rating from '../components/Rating'
 // import axios from 'axios'
 
@@ -73,6 +74,7 @@ const Product = () => {
       </Link>
       {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <>
+        <Meta title={product.name} />
           <Row>
             <Col md={6}>
               <Card>

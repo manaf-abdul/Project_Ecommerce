@@ -18,12 +18,12 @@ const Products = ({product}) => {
                    <Rating value={product.rating} text={`${product.numReviews} reviews`}/>
                 </Card.Text>
               <Card.Text as='h5'>
-                {product.discountPrice > 0 ? <strike>{product.price}</strike>:null}
+                {product.discountPrice > 0 ? <strike>(${product.price})</strike>:null}
                 </Card.Text>
               <Card.Text as='h4'>
                 {product.discountPrice > 0 
-                ? Math.floor(product.price - (product.price * (product.discountPrice/100)))
-                :product.price}
+                ? <>&#36; {Math.floor(product.price - (product.price * (product.discountPrice/100)))}</>
+                : <>&#36; {product.price}</>}
                 
               </Card.Text>
             </Card.Body>

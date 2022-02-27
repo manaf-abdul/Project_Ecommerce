@@ -167,7 +167,7 @@ const OrderScreen = () => {
                                 {order.shippingAddress.postalCode},{' '}
                                 {order.shippingAddress.country}
                             </p>
-                            {order.isDelivered ? <Message variant="success">Delivered {order.deliveredAt}</Message> : (
+                            {order.isDelivered ? <Message variant="success">Delivered {order.deliveredAt.substring(0,10)}</Message> : (
                                 <Message variant="danger">Not Delivered</Message>
                             )}
                         </ListGroup.Item>
@@ -178,7 +178,7 @@ const OrderScreen = () => {
                                 <strong>Method: </strong>
                                 {order.paymentMethod}
                             </p>
-                            {order.isPaid ? <Message variant="success">Paid on {order.paidAt}</Message> : (
+                            {order.isPaid ? <Message variant="success">Paid on {order.paidAt.substring(0,10)}</Message> : (
                                 <Message variant="danger">Not Paid</Message>
                             )}
                         </ListGroup.Item>

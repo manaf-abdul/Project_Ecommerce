@@ -140,7 +140,10 @@ const ProfileScreen = () => {
                                 </td>
                                 <td>
                                   {order.isCancelled ? (
+                                    <>
                                     <i class="fa fa-check" aria-hidden="true" style={{ color: 'green' }}></i>
+                                    {order.deliveredAt}
+                                    </>
                                   ) : (
                                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                                   )}

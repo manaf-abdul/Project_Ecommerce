@@ -53,26 +53,35 @@ const OrderListScreen = () => {
               <tr key={order._id}>
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
-                <td>{order.createdAt}</td>
+                <td>{order.createdAt.substring(0, 10)}</td>
                 <td>${order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (
-                    order.paidAt
+                    <>
+                    <i class="fa fa-check" aria-hidden="true" style={{ color: 'green' }}></i>
+                    {order.paidAt.substring(0,10)}
+                    </>
                   ) : (
-                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                  <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                   {/* {console.log(order)} */}
                 </td>
                 <td>
                   {order.isDelivered ? (
-                    order.deliveredAt
+                    <>
+                    <i class="fa fa-check" aria-hidden="true" style={{ color: 'green' }}></i>
+                    {order.deliveredAt.substring(0, 10)}
+                    </>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
                 <td>
                   {order.isCancelled ? (
-                    <i class="fa fa-check" aria-hidden="true" style={{ color: 'green' }}></i>
+                    <>
+                      <i class="fa fa-check" aria-hidden="true" style={{ color: 'green' }}></i>
+                      {order.deliveredAt.substring(0, 10)}
+                    </>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}

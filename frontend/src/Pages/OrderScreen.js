@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import { getOrderDetails, payOrder, deliverOrder, deleteOrder } from '../actions/orderActions'
 import Loader from '../components/Loader'
-import { ORDER_PAY_RESET, ORDER_DELIVER_RESET, ORDER_PAY_SUCCESS } from '../constants/orderConstants'
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET, ORDER_PAY_SUCCESS,ORDER_CANCEL_RESET } from '../constants/orderConstants'
 
 const OrderScreen = () => {
     const params = useParams()
@@ -119,6 +119,7 @@ const OrderScreen = () => {
         if (!order || successPay || successDeliver || cancelSuccess || order._id !== orderId) {
             dispatch({ type: ORDER_PAY_RESET })
             dispatch({ type: ORDER_DELIVER_RESET })
+            dispatch({ type: ORDER_CANCEL_RESET })
             dispatch(getOrderDetails(orderId))
         } else if (!order.isPaid) {
             if (!window.paypal) {
@@ -245,7 +246,7 @@ const OrderScreen = () => {
                                     <Col>${order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
-                            {!order.isPaid &&
+                            {!order.isPaid && !order.isCancelled && 
                                 order.paymentMethod === 'PayPal' && (
                                     <>
 
@@ -258,7 +259,7 @@ const OrderScreen = () => {
                                     </>
                                 )}
 
-                            {!order.isPaid && order.paymentMethod === 'RazorPay' && (
+                            {!order.isPaid && !order.isCancelled  && order.paymentMethod === 'RazorPay' && (
                                 <ListGroup.Item>
                                     <Button onClick={showRazorpay} className='btn btn-block round'>Pay with RazorPay</Button>
                                 </ListGroup.Item>
@@ -286,7 +287,7 @@ const OrderScreen = () => {
                             {userInfo &&
                                 userInfo.isAdmin &&
                                 order.isPaid &&
-                                !order.isDelivered && (
+                                !order.isDelivered && !order.isCancelled && (
                                     <ListGroup.Item>
                                         <Button
                                             type='button'

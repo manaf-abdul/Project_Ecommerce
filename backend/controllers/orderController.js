@@ -26,9 +26,7 @@ const addOrderItems = asyncHandler(async(req,res) => {
             totalPrice,
             walletDiscount,
         })
-    console.log(order)
      const createdOrder=await order.save()
-     console.log(createdOrder)
      res.status(201).json(createdOrder)   
     }
 })
@@ -100,15 +98,18 @@ const updateOrderToDelivered = asyncHandler(async(req,res) => {
     }
  })
  
-
+// @desc    Get all orders for a user
+// @route   Get /api/orders/myorders
+// @access  Private
 const getMyOrders = asyncHandler(async(req,res) => {
-    console.log(req.user._id)
     const orders=await Order.find({user:req.user._id})
    res.json(orders)
-//    console.log(orders)
  })
 
 
+// @desc    Get all orders
+// @route   Get /api/orders/
+// @access  Private
 const getOrders=asyncHandler(async(req,res)=>{
     const orders=await Order.find({}).populate('user','id name')
     res.json(orders)

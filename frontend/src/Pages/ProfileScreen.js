@@ -114,6 +114,7 @@ const ProfileScreen = () => {
                               <th>TOTAL</th>
                               <th>PAID</th>
                               <th>DELIVERED</th>
+                              <th>CANCELLED</th>
                               <th></th>
                             </tr>
                           </thead>
@@ -133,6 +134,13 @@ const ProfileScreen = () => {
                                 <td>
                                   {order.isDelivered ? (
                                     order.deliveredAt
+                                  ) : (
+                                    <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                  )}
+                                </td>
+                                <td>
+                                  {order.isCancelled ? (
+                                    <i class="fa fa-check" aria-hidden="true" style={{ color: 'green' }}></i>
                                   ) : (
                                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                                   )}

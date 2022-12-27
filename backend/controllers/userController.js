@@ -3,28 +3,34 @@ import User from '../Models/userModel.js'
 import generateToken from '../utils/generateToken.js'
 
 const authUser = asyncHandler(async (req, res) => {
+  console.log(req.body);
   const { email, password } = req.body
-  const user = await User.findOne({ email: email })
+  try {
+    const user = await User.findOne({ email: email })
 
-  if (user.isBlock) {
-    res.status(401)
-    throw new Error('User blocked by admin')
+    if (user.isBlock) {
+      res.status(401)
+      throw new Error('User blocked by admin')
+    }
+  
+    if (user) {
+        res.json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          token: generateToken(user._id)
+        })
+        console.log('user signin success')
+    }
+    else {
+      res.status(401)
+      throw new Error('Invalid email or password')
+    }
+  } catch (error) {
+    console.log(error);
   }
-
-  if (user && (await user.matchPassword(password))) {
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        token: generateToken(user._id)
-      })
-      console.log('user signin success')
-  }
-  else {
-    res.status(401)
-    throw new Error('Invalid email or password')
-  }
+ 
 })
 
 const getUserProfile = asyncHandler(async (req, res) => {

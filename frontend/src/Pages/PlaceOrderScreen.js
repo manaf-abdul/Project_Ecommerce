@@ -23,8 +23,8 @@ const PlaceOrderScreen = () => {
     }
 
     let walletUsed=0;
-    if(Number(cart.itemsPrice)+Number(cart.shippingPrice)-(user.wallet) > 0){
-        walletUsed=Number(user.wallet)
+    if(Number(cart.itemsPrice)+Number(cart.shippingPrice)-(user?.wallet) > 0){
+        walletUsed=Number(user?.wallet)
     }else{
         walletUsed=Number(cart.itemsPrice)+Number(cart.shippingPrice)
     }

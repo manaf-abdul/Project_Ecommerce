@@ -59,27 +59,28 @@ const updateProduct = asyncHandler(async (req, res) => {
 
     let images=[]
     
-    if(typeof req.body.images==="string"){
-        images.push(req.body.images)
-    }else{
-        images=req.body.images
-    }
+   try {
+    // if(typeof req.body.images==="string"){
+    //     images.push(req.body.images)
+    // }else{
+    //     images=req.body.images
+    // }
 
-    let imagesLinks=[]
+    // let imagesLinks=[]
 
-    for (let i=0;i<images.length;i++){
-        const result=await cloudinary.v2.uploader.upload(images[i],{
-            folder:'products',
-            // width: 150,
-            // height: 150,
-            crop: 'scale',
-        })
-        imagesLinks.push({ 
-            public_id: result.public_id,
-            url: result.secure_url,
-        })
-    }
-    req.body.images = imagesLinks
+    // for (let i=0;i<images.length;i++){
+    //     const result=await cloudinary.v2.uploader.upload(images[i],{
+    //         folder:'products',
+    //         // width: 150,
+    //         // height: 150,
+    //         crop: 'scale',
+    //     })
+    //     imagesLinks.push({ 
+    //         public_id: result.public_id,
+    //         url: result.secure_url,
+    //     })
+    // }
+    // req.body.images = imagesLinks
 
     const product = await Product.findById(req.params.id)
 
@@ -88,7 +89,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         product.price=price
         product.description=description
         product.image=image
-        product.images = req.body.images
+        product.images = req.body.images ? req.body.images :product.images
         product.brand=brand
         product.category=category
         product.countInStock=countInStock
@@ -99,6 +100,9 @@ const updateProduct = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Product not found')
     }
+   } catch (error) {
+    console.log(error)
+   }
 })
 
 const getProductsReport = asyncHandler(async (req, res) => {
